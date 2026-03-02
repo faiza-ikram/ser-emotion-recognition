@@ -1,0 +1,278 @@
+/* ─── Google Font ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ─── Reset & Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:       #2563EB;
+  --blue-light: #3B82F6;
+  --blue-dark:  #1D4ED8;
+  --bg:         #F3F4F6;
+  --white:      #FFFFFF;
+  --text:       #111827;
+  --muted:      #6B7280;
+  --border:     #E5E7EB;
+  --radius:     12px;
+  --shadow:     0 4px 24px rgba(0,0,0,0.10);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+
+/* ─── Navbar ──────────────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: var(--white);
+  box-shadow: 0 1px 0 var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.navbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 1.1rem; color: var(--text);
+  text-decoration: none;
+}
+.brand-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), #60A5FA);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 18px;
+}
+.navbar-links { display: flex; gap: 28px; list-style: none; }
+.navbar-links a {
+  text-decoration: none; color: var(--text);
+  font-size: 0.92rem; font-weight: 500;
+  display: flex; align-items: center; gap: 4px;
+}
+.navbar-links a:hover { color: var(--blue); }
+.btn-dashboard {
+  background: var(--blue); color: white;
+  padding: 10px 22px; border-radius: 8px;
+  font-weight: 600; font-size: 0.92rem;
+  transition: background 0.2s;
+}
+.btn-dashboard:hover { background: var(--blue-dark); }
+
+/* ─── Hero ────────────────────────────────────────────────────────── */
+.hero {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  min-height: calc(100vh - 73px);
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800; color: var(--text);
+  line-height: 1.15; margin-bottom: 20px;
+}
+.hero p {
+  max-width: 520px; font-size: 1.05rem;
+  color: var(--muted); line-height: 1.7;
+  margin-bottom: 40px;
+}
+.btn-record {
+  background: var(--blue); color: white;
+  padding: 14px 36px; border-radius: 50px;
+  font-size: 1rem; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+}
+.btn-record:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.45);
+}
+.btn-record svg { font-size: 18px; }
+
+/* ─── Waveform area ───────────────────────────────────────────────── */
+.waveform-wrapper {
+  width: 100%; max-width: 680px;
+  margin-top: 40px;
+}
+#waveform { width: 100%; }
+.recorder-controls {
+  display: flex; align-items: center; gap: 16px;
+  justify-content: center; margin-bottom: 16px;
+}
+.btn-done {
+  background: var(--blue); color: white;
+  padding: 11px 28px; border-radius: 50px;
+  font-weight: 600; font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.btn-done:hover { background: var(--blue-dark); }
+.btn-secondary {
+  background: transparent; color: var(--text);
+  padding: 11px 20px; border-radius: 50px;
+  font-weight: 500; font-size: 0.95rem;
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.btn-secondary:hover { background: var(--border); }
+.timer {
+  font-size: 0.82rem; color: var(--muted);
+  text-align: center; margin-top: 8px;
+}
+.recording-label {
+  font-size: 0.9rem; color: var(--muted);
+  text-align: center; margin-bottom: 6px;
+}
+.rec-dot {
+  display: inline-block; width: 8px; height: 8px;
+  background: #EF4444; border-radius: 50%;
+  margin-right: 6px;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ─── Auth Modal ──────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal-card {
+  background: var(--white); border-radius: 20px;
+  padding: 40px 36px; width: 420px;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.25s;
+  position: relative;
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; color: var(--muted);
+  font-size: 1.2rem; padding: 4px 8px;
+}
+.modal-logo {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--blue), #60A5FA);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; color: white; font-size: 22px;
+}
+.modal-card h2 {
+  text-align: center; font-size: 1.35rem;
+  font-weight: 700; margin-bottom: 24px;
+}
+.btn-google, .btn-apple {
+  width: 100%; padding: 12px;
+  border-radius: 10px; font-size: 0.95rem;
+  font-weight: 500; margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: background 0.15s;
+}
+.btn-google { background: var(--blue); color: white; }
+.btn-google:hover { background: var(--blue-dark); }
+.btn-apple { background: var(--text); color: white; }
+.btn-apple:hover { background: #374151; }
+.divider {
+  text-align: center; color: var(--muted);
+  font-size: 0.85rem; margin: 16px 0;
+  position: relative;
+}
+.input-group { margin-bottom: 16px; }
+.input-group label {
+  display: block; font-size: 0.85rem;
+  font-weight: 500; margin-bottom: 6px;
+}
+.input-group input {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 0.95rem; font-family: inherit;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.input-group input:focus { border-color: var(--blue); }
+.modal-footer {
+  text-align: center; font-size: 0.85rem;
+  color: var(--muted); margin-top: 12px;
+}
+.modal-footer a { color: var(--blue); font-weight: 500; cursor: pointer; }
+.btn-submit {
+  width: 100%; padding: 12px;
+  background: var(--blue); color: white;
+  border-radius: 10px; font-size: 0.95rem;
+  font-weight: 600; margin-bottom: 12px;
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: var(--blue-dark); }
+
+/* ─── Analysis Progress ───────────────────────────────────────────── */
+.progress-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; backdrop-filter: blur(4px);
+}
+.progress-card {
+  background: var(--white); border-radius: 20px;
+  padding: 36px 48px; min-width: 320px;
+  text-align: center; box-shadow: var(--shadow);
+  position: relative;
+}
+.progress-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 18px; }
+.progress-bar-track {
+  height: 8px; background: var(--border);
+  border-radius: 99px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: var(--blue);
+  border-radius: 99px;
+  transition: width 0.4s;
+}
+.progress-pct { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+.btn-close-prog {
+  position: absolute; top: 12px; right: 14px;
+  background: none; color: var(--muted);
+  font-size: 1rem; border-radius: 50%;
+  padding: 4px 8px;
+}
+
+/* ─── Result Card ─────────────────────────────────────────────────── */
+.result-card {
+  background: var(--white); border-radius: 20px;
+  padding: 36px 40px; max-width: 480px;
+  margin: 40px auto 0; box-shadow: var(--shadow);
+  animation: slideUp 0.3s;
+}
+.result-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.emotion-badge {
+  display: inline-block;
+  padding: 6px 20px; border-radius: 50px;
+  font-size: 1.4rem; font-weight: 800;
+  margin: 12px 0;
+  background: linear-gradient(135deg, var(--blue), #60A5FA);
+  color: white; letter-spacing: 1px;
+}
+.confidence-text { font-size: 0.9rem; color: var(--muted); margin-bottom: 20px; }
+.prob-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; font-size: 0.88rem;
+}
+.prob-label { width: 70px; font-weight: 500; text-transform: capitalize; }
+.prob-track { flex: 1; height: 8px; background: var(--border); border-radius: 99px; }
+.prob-fill { height: 100%; background: var(--blue); border-radius: 99px; }
+.prob-val { width: 40px; text-align: right; color: var(--muted); }
+.btn-again {
+  margin-top: 20px; width: 100%;
+  padding: 12px; border-radius: 10px;
+  background: var(--blue); color: white;
+  font-weight: 600; font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.btn-again:hover { background: var(--blue-dark); }

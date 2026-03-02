@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+dist/
+.env
+
+# Python libraries and caches
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Large binaries (optional, but your models are small enough to keep)
+# *.keras
+# *.pkl
