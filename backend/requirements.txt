@@ -1,7 +1,8 @@
 fastapi
 uvicorn[standard]
+gunicorn
 python-multipart
 librosa
 numpy
 scikit-learn
-tensorflow
+tensorflow-cpu
