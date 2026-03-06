@@ -58,6 +58,10 @@ def extract_features(audio_bytes: bytes, sample_rate: int = 22050) -> np.ndarray
         # Load audio (mirroring notebook: duration 2.5s, offset 0.6s if possible, but safe here)
         y, sr = librosa.load(tmp_path, sr=sample_rate, duration=2.5, offset=0.6)
         
+        # ── Normalization (Fix for "Loud == Angry") ─────────────────────────
+        # This ensures the model looks at the emotional quality, not volume.
+        y = librosa.util.normalize(y)
+        
         result = np.array([])
         
         # 1. ZCR
